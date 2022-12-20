@@ -16,11 +16,6 @@ public class q2 {
 
         System.out.println(ob1.x + " " + ob1.y);
 
-        // Creating a new reference variable ob2
-        // pointing to same address as ob1
-
-        // Any change made in ob2 will
-        // be reflected in ob1
         ob1.x = 100;
 
         System.out.println(ob1.x + " " + ob1.y);
