@@ -1,6 +1,6 @@
 package Assignment2;
 
-import java.util.Scanner;
+import java.util.*;
 
 class Book {
     String title;
@@ -25,13 +25,13 @@ class Book {
 }
 
 class BookStore {
-    Book[] books =new Book[10];
+    Assignment2.Book[] books =new Assignment2.Book[10];
     int booknum =-1;
     void addBook(String s){
-        this.books[++this.booknum]=new Book(s);
+        this.books[++this.booknum]=new Assignment2.Book(s);
     }
     void checkOut(String s){
-        for(Book v:this.books){
+        for(Assignment2.Book v:this.books){
             if(v!=null) {
                 if (v.title.equals(s)) {
                     if (!v.checkoutflag) {
@@ -47,7 +47,7 @@ class BookStore {
         System.out.println("Does not exist");
     }
     void returnBook(String s){
-        for(Book v:this.books){
+        for(Assignment2.Book v:this.books){
             if(v!=null) {
                 if (v.title.equals(s)) {
                     v.returner();
@@ -57,7 +57,7 @@ class BookStore {
         }
     }
     void receiveRating(String s, int r){
-        for(Book v:this.books){
+        for(Assignment2.Book v:this.books){
             if(v!=null) {
                 if (v.title.equals(s)) {
                     v.rate(r);
@@ -67,7 +67,7 @@ class BookStore {
     }
     void listInventory(){
         int flag=0;
-        for(Book v:this.books){
+        for(Assignment2.Book v:this.books){
             if(v!=null&& !v.checkoutflag) {
                 flag=1;
                 System.out.print(v.title);
@@ -81,7 +81,7 @@ class BookStore {
 
 public class Library {
     void Launch(){
-        BookStore store=new BookStore();
+        Assignment2.BookStore store=new Assignment2.BookStore();
         Scanner sc=new Scanner(System.in);
         int option,rate;
         String t="";
@@ -89,7 +89,15 @@ public class Library {
         store.addBook("Merchant Of Venis");
         store.addBook("Romeo & Juliet");
         while(true) {
-            System.out.println("Menu:\t1.ADD NEW BOOK\t2.CHECKOUT A BOOK\t3.RETURN A BOOK\t4.RATE A BOOK\t5.VIEW INVENTORY\t6.EXIT\t");
+            System.out.println("""
+                    
+                    Menu:
+                    1.ADD NEW BOOK
+                    2.CHECKOUT A BOOK
+                    3.RETURN A BOOK
+                    4.RATE A BOOK
+                    5.VIEW INVENTORY
+                    6.EXIT""");
             option = sc.nextInt();
             if(option<=4&&option>=1){
                 sc.nextLine();
@@ -115,7 +123,7 @@ public class Library {
         }
     }
     public static void main(String[] args) {
-        Library start=new Library();
+        Assignment2.Library start=new Assignment2.Library();
         start.Launch();
     }
 }
