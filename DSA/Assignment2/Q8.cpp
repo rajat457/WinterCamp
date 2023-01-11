@@ -70,7 +70,7 @@ int main()
 	cout << ("Created Linked list is:\n");
 	llist->printList();
 
-	int N = 1;
+	int N = 2;
 	llist->head = llist->deleteNode(N);
 
 	cout << ("\nLinked List after Deletion is:\n");

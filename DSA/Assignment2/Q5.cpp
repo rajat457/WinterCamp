@@ -1,74 +1,78 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <unordered_map>
 using namespace std;
-
-struct Node {
-	int data;
-	struct Node* next;
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node(int data)
+    {
+        this->data = data;
+        next = NULL;
+    }
 };
-
-int countCommonNodes(struct Node* head1, struct Node* head2)
+int Common(Node *head)
 {
-	struct Node* current1 = head1;
+    Node *current = head;
+    unordered_map<int, int> m;
 
-	struct Node* current2 = head2;
-
-	int count = 0;
-
-	while (current1 != NULL) {
-		while (current2 != NULL) {
-			if (current1->data == current2->data)
-				count++;
-			current2 = current2->next;
-		}
-		current1 = current1->next;
-		current2 = head2;
-	}
-	return count;
+    int mostCommon, frequency = 0;
+    while (current != NULL)
+    {
+        m[current->data]++;
+        current = current->next;
+    }
+    for (auto i : m)
+    {
+        if (i.second > frequency)
+        {
+            mostCommon = i.first;
+            frequency = i.second;
+        }
+    }
+    return mostCommon;
 }
-
-void push(struct Node** head_ref, int new_data)
+void printList(Node *head)
 {
-	struct Node* new_node = new Node;
-	new_node->data = new_data;
-	new_node->next = *head_ref;
-	*head_ref = new_node;
-}
-
-void printList(struct Node* head)
-{
-	while (head != NULL) {
-		cout << head->data << " ";
-		head = head->next;
-	}
-	cout << endl;
+    Node *current = head;
+    while (current != NULL)
+    {
+        cout << current->data << " ";
+        current = current->next;
+    }
+    cout << "\n";
 }
 
 int main()
 {
-	struct Node* head1 = NULL;
-	struct Node* head2 = NULL;
+    cout << "\nEnter number of values in linked list: ";
+    int n;
+    cin >> n;
+    cout << "\nEnter the values: ";
+    Node *head = NULL;
+    Node *tail = NULL;
+    for (int i = 0; i < n; i++)
+    {
+        int k;
+        cin >> k;
+        Node *temp = new Node(k);
+        if (head == NULL)
+        {
+            head = temp;
+            tail = temp;
+        }
+        else
+        {
+            tail->next = temp;
+            tail = temp;
+        }
+    }
 
-	push(&head1, 17);
-	push(&head1, 10);
-	push(&head1, 12);
-	push(&head1, 4);
-	push(&head1, 3);
+    cout << "\nLinked list: ";
+    printList(head);
 
-	push(&head2, 12);
-	push(&head2, 34);
-	push(&head2, 575);
-	push(&head2, 8);
-	push(&head2, 4);
-	push(&head2, 10);
+    cout << "Most common element in Linked list: " << Common(head);
 
-	cout << "Given Linked List A: \n";
-	printList(head1);
-
-	cout << "Given Linked List B: \n";
-	printList(head2);
-
-	int count = countCommonNodes(head1, head2);
-
-	cout << "Number of common node in both list is = " << count;
-	return 0;
+    return 0;
 }
